@@ -26,7 +26,7 @@ export class CoursesService {
     //através de programação reativa, utilizando operadores do RXJS
     .pipe(
       first(),//operador recebe a conexão do servidor apenas uma vez e encerra
-      delay(5000),
+      delay(2000),
       tap(courses => console.log(courses))
     );
 
