@@ -2,6 +2,7 @@
 //e realizar validações básicas.
 //Dados e manupilação de dados ficam no Service(serviço).
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 
 import { Course } from '../models/course';
 import { CoursesService } from '../services/courses.service';
@@ -14,7 +15,7 @@ import { CoursesService } from '../services/courses.service';
 })
 export class CoursesComponent implements OnInit {
 
-  courses: Course[] = [] // Sempre tipar as variáveis e sempre inicializar a variável. Podendo
+  courses: Observable<Course[]>; // Sempre tipar as variáveis e sempre inicializar a variável. Podendo
   //ser dentro do construtor ou na declaração conforme acima
   displayedColumns = ['name', 'category']; // Aqui são as colunas que serão mostradas na tabela.
   //No nosso caso, name e category
@@ -38,12 +39,14 @@ export class CoursesComponent implements OnInit {
   //Com Http Client
   //Injetando a dependência do CursosService no construtor
   constructor(private coursesService: CoursesService) {
+    //Também podemos inicializar a variável dentro do construtor, quando se tratar de um observable.
+    this.courses = this.coursesService.list();
   }
 
   ngOnInit(): void {
     //Lista de cursos será exibida quando componente for inicializado.
     // atribuindo os cursos recebidos do cursos service para variável Courses.
-    this.courses = this.coursesService.list();
+    //this.courses = this.coursesService.list();
   }
 
 }
