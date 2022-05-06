@@ -15,7 +15,7 @@ import { CoursesService } from '../services/courses.service';
 })
 export class CoursesComponent implements OnInit {
 
-  courses: Observable<Course[]>; // Sempre tipar as variáveis e sempre inicializar a variável. Podendo
+  courses$: Observable<Course[]>; // Sempre tipar as variáveis e sempre inicializar a variável. Podendo
   //ser dentro do construtor ou na declaração conforme acima
   displayedColumns = ['name', 'category']; // Aqui são as colunas que serão mostradas na tabela.
   //No nosso caso, name e category
@@ -40,7 +40,7 @@ export class CoursesComponent implements OnInit {
   //Injetando a dependência do CursosService no construtor
   constructor(private coursesService: CoursesService) {
     //Também podemos inicializar a variável dentro do construtor, quando se tratar de um observable.
-    this.courses = this.coursesService.list();
+    this.courses$ = this.coursesService.list();
   }
 
   ngOnInit(): void {
