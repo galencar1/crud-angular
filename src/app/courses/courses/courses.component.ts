@@ -3,6 +3,7 @@
 //Dados e manupilação de dados ficam no Service(serviço).
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of, pipe, } from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/error-dialog.component';
@@ -20,7 +21,7 @@ export class CoursesComponent implements OnInit {
 
   courses$: Observable<Course[]>; // Sempre tipar as variáveis e sempre inicializar a variável. Podendo
   //ser dentro do construtor ou na declaração conforme acima
-  displayedColumns = ['name', 'category']; // Aqui são as colunas que serão mostradas na tabela.
+  displayedColumns = ['_id','name', 'category','actions']; // Aqui são as colunas que serão mostradas na tabela.
   //No nosso caso, name e category
 
   /************************************************************************************************** */
@@ -44,6 +45,8 @@ export class CoursesComponent implements OnInit {
   constructor(
     private coursesService: CoursesService,
     public dialog: MatDialog,
+    private router: Router,
+    private route: ActivatedRoute,
     ) {
     //Também podemos inicializar a variável dentro do construtor, quando se tratar de um observable.
     this.courses$ = this.coursesService.list()
@@ -67,6 +70,11 @@ export class CoursesComponent implements OnInit {
     //Lista de cursos será exibida quando componente for inicializado.
     // atribuindo os cursos recebidos do cursos service para variável Courses.
     //this.courses = this.coursesService.list();
+  }
+
+  onAdd(){
+    //console.log('onAdd');
+    this.router.navigate(['new'], {relativeTo: this.route});
   }
 
 }

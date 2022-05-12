@@ -12,7 +12,7 @@ export class CoursesService {
   //Assim ficará disponível para toda a aplicação
 
   //Variável API recebe o caminho do servidor onde estão os dados (end-point)
-  private readonly API = '/assets/cursos.json';
+  private readonly API = 'api/courses';
   constructor(private httpClient: HttpClient) { }
 
   list() {
