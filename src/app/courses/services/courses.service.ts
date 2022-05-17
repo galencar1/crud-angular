@@ -32,4 +32,9 @@ export class CoursesService {
 
 
   }
+
+  save( record: Course){
+    //Para criar um curso novo utilizamos o HTTP POST
+    return this.httpClient.post<Course>(this.API, record).pipe(first());
+  }
 }
